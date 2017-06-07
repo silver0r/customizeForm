@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+*{margin:0;padding:0;border:0px;outline:0;font-size:12px;vertical-align:baseline;background:transparent;}
+label,select,input,textarea{vertical-align:middle;}
+
+.element_box{margin:50px;padding:10px;border:1px solid #000;width:280px;}
+.mt10{margin-top:10px;}
+.m10{margin:10px;}
+
+.customize_form.hide{display:none;}
+
+/* font.html 관련 - 제거예정 */
+body{font-family:'Malgun Gothic','맑은고딕',Arial,sans-serif;}
+.size12{font-size:12px;}
+.size18{font-size:18px;}
+.size24{font-size:24px;}
+.size36{font-size:36px;}
+.size48{font-size:48px;}
+.size60{font-size:60px;}
+.guide{font-size:10px;}

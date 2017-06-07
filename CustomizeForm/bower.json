@@ -1,0 +1,41 @@
+{
+  "name": "customizeform",
+  "description": "select, checkbox, radio, file DOM customize module",
+  "main": "jquery.customize.form.js",
+  "authors": [
+    "silver0r"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "checkbox",
+    "radio",
+    "file",
+    "select",
+    "DOM",
+    "customize"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "dependencies": {
+    "jquery": "1.12.4",
+    "jquery-ellipsis": "^1.1.1",
+    "modernizr": "^3.5.0"
+  },
+  "install": {
+    "path": {
+      "js": "js/lib"
+    },
+    "sources": {
+      "jquery": [
+        "bower_components/jquery/dist/jquery.min.js"
+      ],
+      "jquery-ellipsis": [
+        "bower_components/jquery-ellipsis/dist/jquery.ellipsis.min.js"
+      ],
+      "modernizr": [
+        "bower_components/modernizr/dist/modernizr.min.js"
+      ]
+    }
+  }
+}

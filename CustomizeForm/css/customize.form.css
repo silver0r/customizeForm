@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+
+.custom-form-select01{background:url('img/img_select01_sprite.png') no-repeat 0 0;}
+.custom-form-focused01{background:url('img/img_select01_sprite.png') no-repeat 0 -40px;}
+.custom-form-disabled01{background:url('img/img_select01_sprite.png') no-repeat 0 -80px;}
+.custom-form-select02{background:url('img/img_select02_sprite.png') no-repeat 0 0;}
+.custom-form-focused02{background:url('img/img_select02_sprite.png') no-repeat 0 -40px;}
+.custom-form-disabled02{background:url('img/img_select02_sprite.png') no-repeat 0 -80px;}

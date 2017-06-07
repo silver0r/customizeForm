@@ -1,0 +1,29 @@
+{
+  "name": "customizeform",
+  "version": "1.0.0",
+  "description": "select, checkbox, radio, file DOM customize library",
+  "main": "jquery.customize.form.js",
+  "keywords": [
+    "checkbox",
+    "radio",
+    "file",
+    "select",
+    "DOM customize"
+  ],
+  "author": "silver0r",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt-contrib-connect": "^1.0.2"
+  },
+  "dependencies": {
+    "bower": "^1.8.0",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-htmlhint": "^0.9.13",
+    "jit-grunt": "^0.10.0",
+    "time-grunt": "^1.4.0"
+  }
+}

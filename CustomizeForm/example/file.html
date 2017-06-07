@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="../css/example/example.css" />
+<title>file example</title>
+</head>
+<body>
+<div class="element_box">
+	<input type="file" id="file1" class="customize_form hide file" name="file1" />
+	<input type="file" id="file2" class="customize_form hide file" name="file2" />
+</div>
+
+<script type="text/javascript" src="../js/lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-ellipsis/jquery.ellipsis.min.js"></script>
+<script type="text/javascript" src="../js/src/jquery.customize.form.js"></script>
+<!--
+<script type="text/javascript" src="../js/dist/jquery.customize.form.min.js"></script>
+-->
+<script type="text/javascript">
+$(function() {
+	var file1 = $('#file1').customizeFile({
+			buttonType: 'text',
+			enableInitButton: true
+	});
+	
+	var file2 = $('#file2').customizeFile({
+			buttonType: 'image',
+			buttonBackgroundImage: '../css/img/img_find_btn01.jpg'
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="../css/example/example.css" />
+<title>checkbox example</title>
+</head>
+<body>
+<div class="element_box">
+	<div class="m10">
+		<input type="checkbox" id="choice1" class="customize_form hide image_type" checked="checked" /><label for="choice1">선택1</label>
+		<input type="checkbox" id="choice2" class="customize_form hide image_type" checked="checked" disabled="disabled" /><label for="choice2">선택2</label>
+		<input type="checkbox" id="choice3" class="customize_form hide image_type" checked="checked" /><label for="choice3">선택3</label>
+	</div>
+	<div class="m10">
+		<a href="javascript:;" id="btn_image_check">선택2 check</a>
+		<a href="javascript:;" id="btn_image_uncheck">선택2 uncheck</a>
+		<a href="javascript:;" id="btn_image_remove">선택1,2,3 remove</a>
+	</div>
+	<div class="m10">
+		<input type="checkbox" id="choice4" class="customize_form hide text_type" checked="checked" /><label for="choice4">선택4</label>
+		<input type="checkbox" id="choice5" class="customize_form hide text_type" disabled="disabled" /><label for="choice5">선택5</label>
+		<input type="checkbox" id="choice6" class="customize_form hide text_type" checked="checked" /><label for="choice6">선택6</label>
+	</div>
+	<div class="m10">
+		<a href="javascript:;" id="btn_text_check">선택5 check</a>
+		<a href="javascript:;" id="btn_text_uncheck">선택5 uncheck</a>
+	</div>
+</div>
+
+<script type="text/javascript" src="../js/lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../js/lib/modernizr-min/modernizr.js"></script>
+<script type="text/javascript" src="../js/src/jquery.customize.form.js"></script>
+<!--
+<script type="text/javascript" src="../js/dist/jquery.customize.form.min.js"></script>
+-->
+<script type="text/javascript">
+$(function() {
+	var $imageType = $('.image_type').customizeCheckbox({		
+		backgroundImage: '../css/img/img_checkbox.png',
+		backgroundImage2x: '../css/img/img_checkbox@2x.png',
+		backgroundSize: '15px 140px'
+	});
+	
+	var $textType = $('.text_type').customizeCheckbox({
+		type: 'text',
+		backgroundColor: '#fff',
+		selectedBackgroundColor: '#000',
+		borderColor: '#000',
+		color: '#000',
+		selectedColor: '#fff',
+		width: 50,
+		height: 50,
+		buttonBorderRadius: 5
+	});
+	
+	$('#btn_image_check').click(function() {
+		$('#choice2').prop('checked', true).trigger('change');
+	});
+	
+	$('#btn_image_uncheck').click(function() {
+		$('#choice2').prop('checked', false).trigger('change');
+	});
+	
+	$('#btn_image_remove').click(function() {
+		$('.image_type').customizeCheckbox('remove');
+	});
+	
+	$('#btn_text_check').click(function() {
+		$('#choice5').prop('checked', true).trigger('change');
+	});
+	
+	$('#btn_text_uncheck').click(function() {
+		$('#choice5').prop('checked', false).trigger('change');
+	});
+});
+</script>
+</body>
+</html>
