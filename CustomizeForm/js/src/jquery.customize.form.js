@@ -9,7 +9,7 @@ MIT License
 customizeCheckbox, customizeRadio used modernizr
 customizeFile used jquery-ellipsis
 
--- brower support--------------------------------------
+-- browser support--------------------------------------
 customizeFile support - IE6~11, FF, Chrome, Opera
 customizeCheckbox support - IE6~11, FF, Chrome, Opera
 customizeRadio support - IE6~11, FF, Chrome, Opera

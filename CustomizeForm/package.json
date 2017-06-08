@@ -1,6 +1,6 @@
 {
   "name": "customizeform",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "select, checkbox, radio, file DOM customize library",
   "main": "jquery.customize.form.js",
   "keywords": [
@@ -10,8 +10,19 @@
     "select",
     "DOM customize"
   ],
+  "repository": {
+    "type": "git",
+    "url":  "https://github.com/silver0r/customizeForm.git"
+  },
+  "author": {
+    "name": "silver0r",
+    "email": "silver0r@naver.com"
+  },
   "author": "silver0r",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/silver0r/customizeForm/issues"
+  },
   "devDependencies": {
     "grunt-contrib-connect": "^1.0.2"
   },
