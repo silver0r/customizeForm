@@ -1,7 +1,7 @@
 /*
-select, checkbox, radio, file customize module v.1.0
+select, checkbox, radio, file customize module v1.0.1
 
-(c) 2016 silver0r
+(c) 2017 silver0r
 
 dependency: jQuery >= 1.7.0, modernizr(optional) >= 2.0.6, jquery-ellipsis = 1.1.1
 MIT License
@@ -250,8 +250,8 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
                     break;
                 case 'off_hover':
                     borderColor = this.options.borderColor;
-                    backgroundColor = this.options.selectedBackgroundColor;
-                    color = this.options.selectedColor;
+                    backgroundColor = this.options.backgroundColor;
+                    color = this.options.color;
                     
                     break;
                 case 'on':
@@ -355,7 +355,9 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
                 disableBorderColor      : '#adb2b5',                        // text type checkbox disable border color
                 borderRadius            : 5,                                // text type checkbox border radius
                 initShow				: true,								// Display on screen at initialization
-                initShowClass			: 'hide'							// Delete a specific class for screen display
+                initShowClass			: 'hide',							// Delete a specific class for screen display
+                focusOutline			: '1px dotted #000',				// element focus outline
+                enableFocusOutline		: true								// element focus outline enable(default: true)
         };
         
         this.$element = $element;
@@ -402,10 +404,22 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
         
         $object.on('click.customizeForm focus.customizeForm', function() {
         	that._checkStatusWithHover($object, $labelObject);
-        }).on('blur.customizeForm', function() {
-        	that._checkStatus($object, $labelObject);
         }).on('change.customizeForm', function() {
         	that._changeTrigger($object, $labelObject);
+        }).on('focus.customizeForm', function() {
+        	if(that.options.enableFocusOutline) {
+        		$labelObject.css({
+        			outline: that.options.focusOutline
+        		});
+        	}
+        }).on('blur.customizeForm', function() {
+        	that._checkStatus($object, $labelObject);
+        	
+        	if(that.options.enableFocusOutline) {
+	        	$labelObject.css({
+	        		outline: 'none'
+	        	});
+        	}
         });
     };
     
@@ -428,7 +442,11 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
                 borderColor             : '#000',                           // text type radio border color
                 selectedBorderColor     : '#000',                           // text type radio selected border color
                 disableBorderColor      : '#adb2b5',                        // text type radio disable border color
-                borderRadius            : 5                                 // text type radio border radius
+                borderRadius            : 5,                                // text type radio border radius
+                initShow				: true,								// Display on screen at initialization
+                initShowClass			: 'hide',							// Delete a specific class for screen display
+                focusOutline			: '1px dotted #000',				// element focus outline
+                enableFocusOutline		: true								// element focus outline enable(default: true)
         };
         
         this.$element = $element;
@@ -515,8 +533,20 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
         	that._checkStatusWithClick($object, $labelObject, objectName);
         }).on('focus.customizeForm', function() {
         	that._checkStatusWithHover($object, $labelObject);
+        	
+        	if(that.options.enableFocusOutline) {
+	        	$labelObject.css({
+	        		outline: that.options.focusOutline
+	        	});
+        	}
         }).on('blur.customizeForm', function() {
         	that._checkStatus($object, $labelObject);
+        	
+        	if(that.options.enableFocusOutline) {
+	        	$labelObject.css({
+	        		outline: 'none'
+	        	});
+        	}
         }).on('change.customizeForm', function() {
         	that._changeTrigger($object, $labelObject, objectName);
         });
@@ -547,7 +577,9 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
             initButtonWidth				: 12,									// Init button image width
             initButtonHeight			: 12,									// Init button image height
             initShow					: true,									// Display on screen at initialization
-            initShowClass				: 'hide'								// Delete a specific class for screen display
+            initShowClass				: 'hide',								// Delete a specific class for screen display
+            focusOutline				: '1px dotted #000',					// element focus outline
+            enableFocusOutline			: true									// element focus outline enable(default: true)							
         };
         
         this._$oldElement = $element;
@@ -627,7 +659,7 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
             '-khtml-opacity'    : 0,
             zoom                : 1,
             cursor              : 'pointer',
-            border              : '0'
+            border              : '0'            
         });
         
         var $elementParent = $element.parent();
@@ -710,6 +742,18 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
         			$btnFileInit.show();
         		}
         	}
+        }).on('focus.customizeForm', function() {
+        	if(that.options.enableFocusOutline) {
+        		that.$element.closest('.btn_customize_file').css({
+        			outline: that.options.focusOutline
+        		});
+        	}
+        }).on('blur.customizeForm', function() {
+        	if(that.options.enableFocusOutline) {
+	        	that.$element.closest('.btn_customize_file').css({
+	        		outline: 'none'
+	        	});
+        	}
         });
         
         if(this.options.enableInitButton) {
@@ -763,8 +807,9 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
         return this.$element.each(function(index) {
             var $object = $(this);
             var $coverElement = $object.prev('.custom_select');
+            var status = 'blur';
             
-            that._changeStatus($object, $coverElement);
+            that._changeStatus($object, $coverElement, status);
             that._event($object, $coverElement);
         });
     };
@@ -802,13 +847,27 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
     };
     
     // change select status
-    Select.prototype._changeStatus = function($object, $coverElement) {
+    Select.prototype._changeStatus = function($object, $coverElement, status) {
         var coverClass = this.options.initClass;
         var coverColor = this.options.color;
         
         if($object.prop('disabled')) {
             coverClass = this.options.disableClass;
             coverColor = this.options.disableColor;
+        }
+        else {
+        	switch(status) {
+	            case 'focus':
+	            	coverClass = this.options.focusClass;
+	                coverColor = this.options.hoverColor;
+	                
+	                break;
+	            case 'blur':
+	            	coverClass = this.options.initClass;
+	                coverColor = this.options.color;
+	                
+	                break;
+	        }
         }
         
         $coverElement.removeClass(this.options.initClass).removeClass(this.options.focusClass)
@@ -825,30 +884,21 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
         $object.on('click.customizeForm keyup.customizeForm', function () {
         	$(document).trigger('changeSelectValue.customizeForm', [$object, $coverElement]);
         }).on('focus.customizeForm', function() {
-        	var color = that.options.hoverColor;
-            if($object.prop('disabled')) {                
-                color = that.options.disableColor;
-            }
-            
-        	$coverElement.addClass(that.options.focusClass).css({
-                color : color
-            });
+        	var status = 'focus';
+        	that._changeStatus($object, $coverElement, status);
             
             $(document).trigger('changeSelectValue.customizeForm', [$object, $coverElement]);
         }).on('blur.customizeForm', function() {
-        	var color = that.options.color;
-            if($object.prop('disabled')) {                
-                color = that.options.disableColor;
-            }
-            
-        	$coverElement.removeClass(that.options.focusClass).css({
-                color : color
-            });
-        }).on('change.customizeForm', function() {
-        	that._changeStatus($object, $coverElement);
+        	var status = 'blur';
+        	that._changeStatus($object, $coverElement, status);
+        }).on('change.customizeForm', function( event, changeFlag ) {
+        	var status = 'focus';
+        	if(changeFlag) {
+        		status = 'blur';
+        	}
+        	that._changeStatus($object, $coverElement, status);
+        	
         	$(document).trigger('changeSelectValue.customizeForm', [$object, $coverElement]);
-            
-            $object.trigger('blur.customizeForm');
         });
     };
     

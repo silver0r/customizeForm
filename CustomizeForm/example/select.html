@@ -68,19 +68,18 @@ $(function() {
 		color					: '#8f8f92'
 	});
 	
-	$('#btn_change1').click(function() {
-		$select1.val(3).trigger('change');
+	$('#btn_change1').on('click', function() {
+		$select1.val(3).trigger('change', true);
 	});
-	$('#btn_change2').click(function() {
-		$select2.val(3).trigger('change');	
+	$('#btn_change2').on('click', function() {
+		$select2.val(3).trigger('change', true);	
 	});
 	
     var flag = true;
-    $('#btn_toggle1').click(function() {
-        $('.select1').prop('disabled', flag).trigger('change');
+    $('#btn_toggle1').on('click', function() {
+        $('.select1').prop('disabled', flag).trigger('change', true);
         flag = !flag;
     });
-	
 });
 </script>
 </body>

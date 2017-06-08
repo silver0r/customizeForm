@@ -10,8 +10,8 @@
 <body>
 <div class="element_box">
 	<div class="m10">
-		<input type="radio" id="choice1" class="customize_form hide image_type" name="type1" /><label for="choice1">선택1</label>
-		<input type="radio" id="choice2" class="customize_form hide image_type" name="type1" checked="checked" disabled="disabled" /><label for="choice2">선택2</label>
+		<input type="radio" id="choice1" class="customize_form hide image_type" name="type1" checked="checked" /><label for="choice1">선택1</label>
+		<input type="radio" id="choice2" class="customize_form hide image_type" name="type1" disabled="disabled" /><label for="choice2">선택2</label>
 		<input type="radio" id="choice3" class="customize_form hide image_type" name="type1" /><label for="choice3">선택3</label>
 	</div>
 	<div class="m10">
@@ -19,8 +19,8 @@
 		<a href="javascript:;" id="btn_image_uncheck">uncheck 버튼</a>
 	</div>
 	<div class="m10">
-		<input type="radio" id="choice4" class="customize_form hide text_type" name="type2" /><label for="choice4">선택4</label>
-		<input type="radio" id="choice5" class="customize_form hide text_type" name="type2" checked="checked" disabled="disabled" /><label for="choice5">선택5</label>
+		<input type="radio" id="choice4" class="customize_form hide text_type" name="type2" checked="checked" /><label for="choice4">선택4</label>
+		<input type="radio" id="choice5" class="customize_form hide text_type" name="type2" disabled="disabled" /><label for="choice5">선택5</label>
 		<input type="radio" id="choice6" class="customize_form hide text_type" name="type2" /><label for="choice6">선택6</label>
 	</div>
 	<div class="m10">
@@ -30,15 +30,17 @@
 </div>
 
 <script type="text/javascript" src="../js/lib/jquery/jquery.min.js"></script>
-<!--
+<script type="text/javascript" src="../js/lib/modernizr/modernizr.min.js"></script>
 <script type="text/javascript" src="../js/src/jquery.customize.form.js"></script>
--->
+<!--
 <script type="text/javascript" src="../js/dist/jquery.customize.form.min.js"></script>
+-->
 <script type="text/javascript">
 $(function() {
 	var $imageType = $('.image_type').customizeRadio({
 		backgroundImage: '../css/img/img_radio.png',
-		backgroundImage2x: '../css/img/img_radio@2x.png'
+		backgroundImage2x: '../css/img/img_radio@2x.png',
+		backgroundSize : '16px auto'
 	});
 	
 	var $textType = $('.text_type').customizeRadio({
@@ -53,19 +55,19 @@ $(function() {
 		buttonBorderRadius: 5
 	});
 
-	$('#btn_image_check').click(function() {
+	$('#btn_image_check').on('click', function() {
 		$('#choice2').prop('checked', true).trigger('change');
 	});
 	
-	$('#btn_image_uncheck').click(function() {
+	$('#btn_image_uncheck').on('click', function() {
 		$('#choice2').prop('checked', false).trigger('change');
 	});
 	
-	$('#btn_text_check').click(function() {
+	$('#btn_text_check').on('click', function() {
 		$('#choice5').prop('checked', true).trigger('change');
 	});
 	
-	$('#btn_text_uncheck').click(function() {
+	$('#btn_text_uncheck').on('click', function() {
 		$('#choice5').prop('checked', false).trigger('change');
 	});
 });

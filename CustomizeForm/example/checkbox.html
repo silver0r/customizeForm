@@ -31,7 +31,7 @@
 </div>
 
 <script type="text/javascript" src="../js/lib/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="../js/lib/modernizr-min/modernizr.js"></script>
+<script type="text/javascript" src="../js/lib/modernizr/modernizr.min.js"></script>
 <script type="text/javascript" src="../js/src/jquery.customize.form.js"></script>
 <!--
 <script type="text/javascript" src="../js/dist/jquery.customize.form.min.js"></script>
@@ -41,7 +41,7 @@ $(function() {
 	var $imageType = $('.image_type').customizeCheckbox({		
 		backgroundImage: '../css/img/img_checkbox.png',
 		backgroundImage2x: '../css/img/img_checkbox@2x.png',
-		backgroundSize: '15px 140px'
+		backgroundSize: '15px auto'
 	});
 	
 	var $textType = $('.text_type').customizeCheckbox({
@@ -56,23 +56,23 @@ $(function() {
 		buttonBorderRadius: 5
 	});
 	
-	$('#btn_image_check').click(function() {
+	$('#btn_image_check').on('click', function() {
 		$('#choice2').prop('checked', true).trigger('change');
 	});
 	
-	$('#btn_image_uncheck').click(function() {
+	$('#btn_image_uncheck').on('click', function() {
 		$('#choice2').prop('checked', false).trigger('change');
 	});
 	
-	$('#btn_image_remove').click(function() {
+	$('#btn_image_remove').on('click', function() {
 		$('.image_type').customizeCheckbox('remove');
 	});
 	
-	$('#btn_text_check').click(function() {
+	$('#btn_text_check').on('click', function() {
 		$('#choice5').prop('checked', true).trigger('change');
 	});
 	
-	$('#btn_text_uncheck').click(function() {
+	$('#btn_text_uncheck').on('click', function() {
 		$('#choice5').prop('checked', false).trigger('change');
 	});
 });
