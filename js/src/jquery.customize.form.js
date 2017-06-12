@@ -1,5 +1,5 @@
 /*
-select, checkbox, radio, file customize module v1.0.1
+select, checkbox, radio, file customize module v1.0.2
 
 (c) 2017 silver0r
 
