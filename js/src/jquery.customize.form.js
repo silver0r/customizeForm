@@ -80,6 +80,12 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
     		},
     		remove : function(types, type) {
     			if(type === types.checkbox || type === types.radio) {
+    			    if($(this).data('enableFullButton')) {
+    			        $(this).removeData('enableFullButton').parent().css({
+    			            position: ''
+    			        });
+    			    }
+    			    
     				$(this).next('label').off('.customizeForm').removeAttr('style');
         			return $(this).off('.customizeForm').removeAttr('style');
     			}
@@ -132,14 +138,25 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
 
     // draw structure
     ChoiceBox.prototype._draw = function() {
-        var labelObjectCSS = null;
+        var labelCSS = null;
+        var choiceBoxCSS = null;
         
         if(this.options.initShow) {
         	this.$element.removeClass(this.options.initShowClass);
         }
         
+        // safari browser 1px spalling bug fix
+        var bugfix = 1;
+        choiceBoxCSS = {
+                marginLeft  : bugfix + 'px',
+                marginRight : -(this.options.width + bugfix) + 'px',
+                width       : this.options.width + 'px',
+                height      : this.options.height + 'px',
+                zIndex      : 0
+        }
+        
         if(this.options.type === 'text') {
-            labelObjectCSS = {
+            labelCSS = {
                     width               : this.options.width + 'px',
                     height              : this.options.height + 'px',
                     lineHeight          : this.options.height + 'px',
@@ -158,10 +175,26 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
                     zIndex              : 100,
                     cursor              : 'pointer'
             };
+            
+            if(this.options.enableFullButton) {
+                delete labelCSS.marginRight;
+                
+                labelCSS.position = 'absolute';
+                labelCSS.width = '100%';
+                
+                delete choiceBoxCSS.width;
+                choiceBoxCSS.position = 'absolute';
+                
+                this.$element.data({
+                    'enableFullButton': this.options.enableFullButton
+                }).parent().css({
+                    position: 'relative'
+                });
+            }
         }
         // image type
         else {
-            labelObjectCSS = {
+            labelCSS = {
                     height              : this.options.height + 'px',
                     lineHeight          : this.options.height + 'px',
                     marginRight         : this.options.labelMarginRight + 'px',
@@ -178,39 +211,30 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
             };
             
             if((typeof Modernizr !== 'undefined') && Modernizr.backgroundsize) {
-                labelObjectCSS.backgroundImage = 'url("' + this.options.backgroundImage2x + '")';
-                labelObjectCSS.backgroundSize = this.options.backgroundSize;
+                labelCSS.backgroundImage = 'url("' + this.options.backgroundImage2x + '")';
+                labelCSS.backgroundSize = this.options.backgroundSize;
             }
             else {
-                labelObjectCSS.backgroundImage = 'url("' + this.options.backgroundImage + '")';
+                labelCSS.backgroundImage = 'url("' + this.options.backgroundImage + '")';
             }
         }
         
         // inline-block IE7 hack properties remove
-        if(this.options.display === 'block') {
-        	labelObjectCSS.display = this.options.display;
-        	
-        	delete labelObjectCSS['*display'];
-        	delete labelObjectCSS['*zoom'];
-        }
+//        if(this.options.display === 'block') {
+//        	labelCSS.display = this.options.display;
+//        	
+//        	delete labelCSS['*display'];
+//        	delete labelCSS['*zoom'];
+//        }
         
         // if width equals -1, width properties remove
-        var parseWidth = parseInt(this.options.width);
-        if($.isNumeric(parseWidth) && parseWidth === -1) {
-        	delete labelObjectCSS.width;
-        }
+//        var parseWidth = parseInt(this.options.width);
+//        if($.isNumeric(parseWidth) && parseWidth === -1) {
+//        	delete labelCSS.width;
+//        }
 
-        this.$element.next('label').css(labelObjectCSS);
         
-        // safari browser 1px spalling bug fix
-        var bugfix = 1;
-        this.$element.css({
-            marginLeft  : bugfix + 'px',
-            marginRight : -(this.options.width + bugfix) + 'px',
-            width       : this.options.width + 'px',
-            height      : this.options.height + 'px',
-            zIndex      : 0
-        });
+        this.$element.css(choiceBoxCSS).next('label').css(labelCSS);
     };
     
     // initialize change element status
@@ -234,7 +258,7 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
     
     // change element status
     ChoiceBox.prototype._changeStatus = function($labelObject, status) {
-        var labelObjectCSS = null;
+        var labelCSS = null;
         
         if(this.options.type === 'text') {
             var borderColor = null;
@@ -280,7 +304,7 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
                     break;
             }
             
-            labelObjectCSS = {
+            labelCSS = {
                     borderColor         : borderColor,
                     backgroundColor     : backgroundColor,
                     color               : color
@@ -300,12 +324,12 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
                 case 'on_disabled'  : position = '0 -' + yCoordinate * 5 + 'px'; break;
             }
             
-            labelObjectCSS = {
+            labelCSS = {
                     backgroundPosition: position
             };
         }
         
-        $labelObject.css(labelObjectCSS);
+        $labelObject.css(labelCSS);
     };
     
     // check element status
@@ -337,14 +361,14 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
     // Checkbox Class
     function Checkbox($element, options) {
         this.defaults = {
-                width                   : 15,                               // checkbox image width
-                height                  : 15,                               // checkbox image heigh
+                width                   : 15,                               // checkbox width
+                height                  : 15,                               // checkbox heigh
                 labelMarginRight        : 10,                               // checkbox margin right
                 labelPaddingLeft        : 10,                               // padding left between label and checkbox
                 backgroundColor         : '#fff',                           // background color
                 backgroundImage         : '../css/img/img_checkbox.png',    // background image source
                 backgroundImage2x       : '../css/img/img_checkbox@2x.png', // background image source @2x
-                type                    : 'image',                          // checkbox type : image, text
+                type                    : 'image',                          // checkbox type : image, text (default: image)
                 color                   : '#000',                           // text type checkbox text color
                 selectedColor           : '#fff',                           // text type checkbox selected text color
                 disableColor            : '#838383',                        // text type checkbox disable text color
@@ -354,10 +378,11 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
                 selectedBorderColor     : '#000',                           // text type checkbox selected border color
                 disableBorderColor      : '#adb2b5',                        // text type checkbox disable border color
                 borderRadius            : 5,                                // text type checkbox border radius
-                initShow				: true,								// Display on screen at initialization
+                initShow				: true,								// Display on screen at initialization (default: true)
                 initShowClass			: 'hide',							// Delete a specific class for screen display
                 focusOutline			: '1px dotted #000',				// element focus outline
-                enableFocusOutline		: true								// element focus outline enable(default: true)
+                enableFocusOutline		: true,								// element focus outline enable (default: true)
+                enableFullButton        : false                             // checkbox full button enable (default: false with option type: text)
         };
         
         this.$element = $element;
@@ -433,7 +458,7 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
                 backgroundColor         : '#fff',                           // background color
                 backgroundImage         : '../css/img/img_checkbox.png',    // background image source
                 backgroundImage2x       : '../css/img/img_checkbox@2x.png', // background image source @2x
-                type                    : 'image',                          // checkbox type : image, text
+                type                    : 'image',                          // checkbox type : image, text (default: image)
                 color                   : '#000',                           // text type radio text color
                 selectedColor           : '#fff',                           // text type radio selected text color
                 disableColor            : '#838383',                        // text type radio disable text color
@@ -443,10 +468,11 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
                 selectedBorderColor     : '#000',                           // text type radio selected border color
                 disableBorderColor      : '#adb2b5',                        // text type radio disable border color
                 borderRadius            : 5,                                // text type radio border radius
-                initShow				: true,								// Display on screen at initialization
+                initShow				: true,								// Display on screen at initialization (default: true)
                 initShowClass			: 'hide',							// Delete a specific class for screen display
                 focusOutline			: '1px dotted #000',				// element focus outline
-                enableFocusOutline		: true								// element focus outline enable(default: true)
+                enableFocusOutline		: true,								// element focus outline enable (default: true)
+                enableFullButton        : false                             // checkbox full button enable (default: false with option type: text)
         };
         
         this.$element = $element;
@@ -557,8 +583,8 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
         this._pluginInfo = pluginInfo;
         
         this.defaults = {
-            buttonType                  : 'text',                               // button type: text, image, bg_sprite
-            buttonText                  : '파일열기',                              // button type = 'text', set button Text
+            buttonType                  : 'text',                               // button type: text, image, bg_sprite (default: text)
+            buttonText                  : '파일열기',                            // button type = 'text', set button Text
             buttonBackgroundImage       : '../css/img/img_find_btn01.jpg',      // button image source
             buttonSpriteClass           : 'btn_file01',                         // button sprite class(bg_sprite only)
             buttonWidth                 : 70,                                   // button width
@@ -572,14 +598,14 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
             verticalSpacing             : 10,                                   // each file wrap element spacing
             ellipsisPosition            : 'middle',                             // text ellipsis: middle, tail
             height                      : 30,                                   // element common height
-            enableInitButton            : false,                                // Init button enable(default: false)
+            enableInitButton            : false,                                // Init button enable (default: false)
             initButtonBackgroundImage   : '../css/img/img_close_btn01.png',     // Init button background image
             initButtonWidth				: 12,									// Init button image width
             initButtonHeight			: 12,									// Init button image height
-            initShow					: true,									// Display on screen at initialization
+            initShow					: true,									// Display on screen at initialization (default: true)
             initShowClass				: 'hide',								// Delete a specific class for screen display
             focusOutline				: '1px dotted #000',					// element focus outline
-            enableFocusOutline			: true									// element focus outline enable(default: true)							
+            enableFocusOutline			: true									// element focus outline enable (default: true)							
         };
         
         this._$oldElement = $element;
@@ -777,18 +803,18 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
         this._pluginInfo = pluginInfo;
         
         this.defaults = {
-                width                   : 90,
-                paddingHorizontal       : 15,
-                height                  : 30,
-                fontSize                : 12,
-                color                   : '#a0a0a0',
-                disableColor            : '#d0d0d1',
-                hoverColor              : '#fc5d2a',
-                initClass               : 'custom-form-select01',
-                focusClass              : 'custom-form-focused01',
-                disableClass            : 'custom-form-disabled01',
-                initShow				: true,
-                initShowClass			: 'hide'
+                width                   : 90,                           // element width
+                paddingHorizontal       : 15,                           // element horizontal padding (0 'X'px) 
+                height                  : 30,                           // element height
+                fontSize                : 12,                           // element font-size
+                color                   : '#a0a0a0',                    // element color
+                disableColor            : '#d0d0d1',                    // element disable color
+                hoverColor              : '#fc5d2a',                    // element hover color
+                initClass               : 'custom-form-select01',       // element init class
+                focusClass              : 'custom-form-focused01',      // element focus class
+                disableClass            : 'custom-form-disabled01',     // element disable class
+                initShow				: true,                         // Display on screen at initialization (default: true)    
+                initShowClass			: 'hide'                        // Delete a specific class for screen display
         };
         
         this.$element = element;

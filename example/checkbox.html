@@ -9,6 +9,7 @@
 </head>
 <body>
 <div class="element_box">
+    <h1>Image Type</h1>
 	<div class="m10">
 		<input type="checkbox" id="choice1" class="customize_form hide image_type" checked="checked" /><label for="choice1">선택1</label>
 		<input type="checkbox" id="choice2" class="customize_form hide image_type" checked="checked" disabled="disabled" /><label for="choice2">선택2</label>
@@ -19,6 +20,7 @@
 		<a href="javascript:;" id="btn_image_uncheck">선택2 uncheck</a>
 		<a href="javascript:;" id="btn_image_remove">선택1,2,3 remove</a>
 	</div>
+	<h1>Text Type</h1>
 	<div class="m10">
 		<input type="checkbox" id="choice4" class="customize_form hide text_type" checked="checked" /><label for="choice4">선택4</label>
 		<input type="checkbox" id="choice5" class="customize_form hide text_type" disabled="disabled" /><label for="choice5">선택5</label>
@@ -27,7 +29,17 @@
 	<div class="m10">
 		<a href="javascript:;" id="btn_text_check">선택5 check</a>
 		<a href="javascript:;" id="btn_text_uncheck">선택5 uncheck</a>
-	</div>
+    </div>
+    <h1>Full Button Type (Mobile)</h1>
+    <ul class="list01 mt10">
+        <li><input type="checkbox" id="choice7" class="customize_form hide mobile_type" checked="checked" /><label for="choice7">선택7</label></li>
+        <li><input type="checkbox" id="choice8" class="customize_form hide mobile_type" checked="checked" /><label for="choice8">선택8</label></li>
+        <li><input type="checkbox" id="choice9" class="customize_form hide mobile_type" checked="checked" /><label for="choice9">선택9</label></li>
+        <li><input type="checkbox" id="choice10" class="customize_form hide mobile_type" checked="checked" /><label for="choice10">선택10</label></li>
+    </ul>
+    <div class="m10">
+        <a href="javascript:;" id="btn_full_remove">선택7,8,9,10 remove</a>
+    </div>
 </div>
 
 <script type="text/javascript" src="../js/lib/jquery/jquery.min.js"></script>
@@ -56,6 +68,40 @@ $(function() {
 		buttonBorderRadius: 5
 	});
 	
+	var mobileOption = {
+	    type: 'text',
+	    enableFullButton: true,
+        backgroundColor: '#fff',
+        selectedBackgroundColor: '#fff',
+        borderColor: '#e8e8e8',
+        color: '#8f8f92',
+        height: 28,
+        borderRadius: 3,
+        labelMarginRight: 0
+	};
+	
+	var checkOption1 = $.extend ( {}, mobileOption, {
+        selectedColor: '#009944',
+        selectedBorderColor: '#009944'
+    } );
+    var checkOption2 = $.extend ( {}, mobileOption, {
+        selectedColor: '#ffb230',
+        selectedBorderColor: '#ffb230'
+    } );
+    var checkOption3 = $.extend ( {}, mobileOption, {
+        selectedColor: '#f47321',
+        selectedBorderColor: '#f47321'
+    } );
+    var checkOption4 = $.extend ( {}, mobileOption, {
+        selectedColor: '#c03014',
+        selectedBorderColor: '#c03014'
+    } );
+    
+    $('#choice7').customizeCheckbox ( checkOption1 );
+    $('#choice8').customizeCheckbox ( checkOption2 );
+    $('#choice9').customizeCheckbox ( checkOption3 );
+    $('#choice10').customizeCheckbox ( checkOption4 );
+	
 	$('#btn_image_check').on('click', function() {
 		$('#choice2').prop('checked', true).trigger('change');
 	});
@@ -74,6 +120,10 @@ $(function() {
 	
 	$('#btn_text_uncheck').on('click', function() {
 		$('#choice5').prop('checked', false).trigger('change');
+	});
+	
+	$('#btn_full_remove').on('click', function() {
+	    $('.mobile_type').customizeCheckbox('remove');
 	});
 });
 </script>
