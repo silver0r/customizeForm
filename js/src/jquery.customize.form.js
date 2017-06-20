@@ -9,17 +9,12 @@ MIT License
 customizeCheckbox, customizeRadio used modernizr
 customizeFile used jquery-ellipsis
 
--- browser support--------------------------------------
-customizeFile support - IE6~11, FF, Chrome, Opera
-customizeCheckbox support - IE6~11, FF, Chrome, Opera
-customizeRadio support - IE6~11, FF, Chrome, Opera
-customizeSelect support - IE8~11, FF, Chrome, Opera
--------------------------------------------------------
--- note -----------------------------------------------
-checkbox, radio 긴 버튼 으로 사용하고자 할 때는
-display:block, width:-1, labelMarginRight:0 옵션 필요
--------------------------------------------------------
-
+-- browser support--------------------------------------------
+customizeFile support - IE6~11, FF, Chrome, Opera, Safari
+customizeCheckbox support - IE6~11, FF, Chrome, Opera, Safari
+customizeRadio support - IE6~11, FF, Chrome, Opera, Safari
+customizeSelect support - IE8~11, FF, Chrome, Opera, Safari
+--------------------------------------------------------------
 */
 (function (factory) {
     'use strict';
@@ -788,9 +783,7 @@ display:block, width:-1, labelMarginRight:0 옵션 필요
                 $(this).closest('.file_text').children('.ellipsis').text('');
 
                 // input type file clear
-                var $file = $(this).closest('.file_wrap').children('.btn_customize_file')
-                        .children('.customizeFile');
-                $file.val('');
+                var $file = $(this).closest('.file_wrap').children('.btn_customize_file').children('.customizeFile');
                 $file.val('').replaceWith( $file.clone(true) );
                 
                 $(this).hide();
