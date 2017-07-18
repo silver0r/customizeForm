@@ -214,21 +214,6 @@ customizeSelect support - IE8~11, FF, Chrome, Opera, Safari
             }
         }
         
-        // inline-block IE7 hack properties remove
-//        if(this.options.display === 'block') {
-//        	labelCSS.display = this.options.display;
-//        	
-//        	delete labelCSS['*display'];
-//        	delete labelCSS['*zoom'];
-//        }
-        
-        // if width equals -1, width properties remove
-//        var parseWidth = parseInt(this.options.width);
-//        if($.isNumeric(parseWidth) && parseWidth === -1) {
-//        	delete labelCSS.width;
-//        }
-
-        
         this.$element.css(choiceBoxCSS).next('label').css(labelCSS);
     };
     
@@ -890,10 +875,10 @@ customizeSelect support - IE8~11, FF, Chrome, Opera, Safari
         }
         
         $coverElement.removeClass(this.options.initClass).removeClass(this.options.focusClass)
-        .removeClass(this.options.disableClass)
-        .addClass(coverClass).text($object.find(':selected').html()).css({
-            color: coverColor
-        });
+            .removeClass(this.options.disableClass)
+            .addClass(coverClass).text($object.find(':selected').html()).css({
+                color: coverColor
+            });
     };
     
     // Select event
