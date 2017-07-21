@@ -1,5 +1,5 @@
 /*
-select, checkbox, radio, file customize module v1.0.2
+select, checkbox, radio, file customize module v1.0.3
 
 (c) 2017 silver0r
 
@@ -7,7 +7,7 @@ dependency: jQuery >= 1.7.0, modernizr(optional) >= 2.0.6, jquery-ellipsis = 1.1
 MIT License
 
 customizeCheckbox, customizeRadio used modernizr
-customizeFile used jquery-ellipsis
+customizeFile used jquery-ellipsis, .ellipsis_text class
 
 -- browser support--------------------------------------------
 customizeFile support - IE6~11, FF, Chrome, Opera, Safari
@@ -827,14 +827,14 @@ customizeSelect support - IE8~11, FF, Chrome, Opera, Safari
     	
         var $coverElements = $('<span></span>').css({
             color               : this.options.color,
-            width               : this.options.width + 'px',
+            width               : this.options.width - (this.options.paddingHorizontal * 2) + 'px',
             padding             : '0 ' + this.options.paddingHorizontal + 'px',
             height              : this.options.height + 'px',
             lineHeight          : this.options.height + 'px',
             fontSize            : this.options.fontSize + 'px',
             overflow            : 'hidden', 
             position            : 'absolute'
-        }).addClass('custom_select');
+        }).addClass('custom_select ellipsis_text');
         
         this.$element.css({
             width               : this.options.width + (this.options.paddingHorizontal * 2) + 'px',
@@ -876,7 +876,7 @@ customizeSelect support - IE8~11, FF, Chrome, Opera, Safari
         
         $coverElement.removeClass(this.options.initClass).removeClass(this.options.focusClass)
             .removeClass(this.options.disableClass)
-            .addClass(coverClass).text($object.find(':selected').html()).css({
+            .addClass(coverClass).html($.trim($object.find(':selected').html())).css({
                 color: coverColor
             });
     };

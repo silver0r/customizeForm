@@ -3,6 +3,8 @@
 *{margin:0;padding:0;border:0px;outline:0;font-size:12px;vertical-align:baseline;background:transparent;}
 label,select,input,textarea{vertical-align:middle;}
 
+.ellipsis_text{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:94%;}
+
 .element_box{margin:50px;padding:10px;border:1px solid #000;width:280px;}
 .mt10{margin-top:10px;}
 .m10{margin:10px;}
