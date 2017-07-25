@@ -5,7 +5,7 @@ This library has applied html5 based web standards and web accessibility. (can h
 [한국어 README](README_ko.md)
 
 # Lastest-Version
-1.0.3 (2017-07-21)
+1.0.4 (2017-07-25)
 
 # Dependency
 jQuery >= 1.7.0, modernizr(optional) >= 2.0.6, jquery-ellipsis = 1.1.1
@@ -367,8 +367,11 @@ This option is used for web accessibility focus compliance.
 This option is used for web accessibility focus compliance. (default: true)
 
 # Improvement List
+## version 1.0.4
+ - Select width bug fix
+
 ## version 1.0.3
- - Add text ellipsis feature in select, 
+ - Add text ellipsis feature in select
 
 ## version 1.0.2
  - checkbox/radio Change full size button structure for web accessibility compliance.

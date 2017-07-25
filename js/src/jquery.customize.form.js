@@ -1,5 +1,5 @@
 /*
-select, checkbox, radio, file customize module v1.0.3
+select, checkbox, radio, file customize module v1.0.4
 
 (c) 2017 silver0r
 
@@ -837,7 +837,7 @@ customizeSelect support - IE8~11, FF, Chrome, Opera, Safari
         }).addClass('custom_select ellipsis_text');
         
         this.$element.css({
-            width               : this.options.width + (this.options.paddingHorizontal * 2) + 'px',
+            width               : this.options.width + 'px',
             height              : this.options.height + 'px',
             lineHeight          : (this.options.height - 4) + 'px',     // instead of line-height(safari browser don't work height)
             position            : 'relative',

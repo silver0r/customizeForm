@@ -1,6 +1,6 @@
 {
   "name": "customizeform",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "select, checkbox, radio, file DOM customize library",
   "main": "jquery.customize.form.js",
   "keywords": [

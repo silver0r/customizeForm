@@ -3,7 +3,7 @@ module.exports = function(grunt) {
 	require('time-grunt')(grunt);
 	
 	var banner = {
-			basic: '/* <%=pkg.main%> v<%=pkg.version%> <%=pkg.license%> license (c) ' + grunt.template.today('yyyy') + ' <%=pkg.author%> */',
+			basic: '/* <%=pkg.main%> v<%=pkg.version%> <%=pkg.license%> license (c) ' + grunt.template.today('yyyy') + ' <%=pkg.author.name%> */',
 			all: '/* jquery.customize.form.min.js, jquery.ellipsis.min.js, modernizr.min.js */\n'
 	};
 	
