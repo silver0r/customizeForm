@@ -3,7 +3,7 @@ javascript, jquery, modernizr, jquery-ellipsis 기반 html form(checkbox, radio,
 이 라이브러리는 html5 기반 웹표준과 웹 접근성을 적용했습니다. (html4.01, xhtml1.0 사용가능)
 
 # Lastest-Version
-1.0.3 (2017-07-21)
+1.0.4 (2017-07-25)
 
 # Dependency
 jQuery >= 1.7.0, modernizr(optional) >= 2.0.6, jquery-ellipsis = 1.1.1
@@ -365,6 +365,9 @@ file 초기화 버튼 width (unit: 'px', 뒤에 'px' 을 붙일 필요가 없습
 이 옵션은 웹 접근성 포커스 준수를 위해 사용합니다. (default: true)
 
 # Improvement List
+## version 1.0.4
+ - select width 관련 버그 픽스
+
 ## version 1.0.3
  - select 말줄임표 기능 추가 
 
